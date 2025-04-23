@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product Marketplace</title>
+  <style>
+    :root {
+      --primary-color: #ffc107; /* Yellow */
+      --secondary-color: #ffff; /* Light gray for contrast */
+      --text-dark: #333;
+      --text-light: #fff;
+      --footer-bg: #212121; /* Dark footer for contrast */
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--secondary-color); /* Solid yellow background */
+      color: var(--text-dark);
+    }
+
+    nav {
+      background-color: var(--primary-color);
+      display: flex;
+      justify-content: space-between;
+      padding: 15px 30px;
+      align-items: center;
+      flex-wrap: wrap;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .nav-center, .nav-right {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    nav a {
+      color: var(--text-dark);
+      text-decoration: none;
+      padding: 10px 16px;
+      font-weight: 600;
+      transition: background 0.3s;
+      border-radius: 6px;
+    }
+
+    nav a:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    .hero {
+      background: url('https://img.freepik.com/free-photo/3d-illustration-smartphone-with-products-coming-out-screen-online-shopping-e-commerce-concept_58466-14529.jpg?t=st=1745319626~exp=1745323226~hmac=8412fc51c5bab2383c98e24f742bf8d73d7d9d81836e7457eed8428c0c4738ba&w=1380') no-repeat center center/cover;
+      height: 400px;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .hero h1 {
+      font-size: 3em;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+    }
+
+    .container {
+      max-width: 1140px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.2em;
+      margin-bottom: 30px;
+      color: #444;
+    }
+
+    .product-grid {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 12px;
+      width: 260px;
+      padding: 15px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.2s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .product-card h3 {
+      margin: 10px 0 5px;
+      color: #222;
+    }
+
+    .product-card p {
+      font-size: 0.9em;
+      color: #666;
+    }
+
+    .product-card button {
+      margin-top: 10px;
+      padding: 8px 16px;
+      background-color: var(--primary-color);
+      color: #222;
+      border: none;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .product-card button:hover {
+      background-color: #e6ac00;
+    }
+
+    footer {
+      background-color: var(--footer-bg);
+      color: var(--text-light);
+      padding: 40px 20px;
+      text-align: center;
+      margin-top: 60px;
+      border-top: 4px solid var(--primary-color);
+    }
+
+    footer p {
+      margin: 8px 0;
+      font-size: 1.1em;
+    }
+
+    footer .social-links {
+      margin-top: 20px;
+    }
+
+    footer .social-links a {
+      margin: 0 15px;
+      color: var(--text-light);
+      font-size: 1.4em;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    footer .social-links a:hover {
+      color: var(--primary-color);
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .nav-center, .nav-right {
+        justify-content: center;
+        margin: 10px 0;
+      }
+
+      .product-grid {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-center">
+      <a href="#">Home</a>
+      <a href="#products">Products</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-right">
+      <a href="/auth">Login</a>
+      <a href="/register">Register</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <h1>Explore & Sell Amazing Products</h1>
+  </div>
+
+  <div class="container" id="products">
+    <h2 class="section-title">Featured Products</h2>
+    <div class="product-grid">
+      <div class="product-card">
+        <img src="https://www.headphonezone.in/cdn/shop/products/KZ-ZSN-Pro-X-Black-01_960774c7-2c57-4f9c-ab41-12cff3d684de.jpg?v=1725445972&width=800" alt="Headphones">
+        <h3>Bluetooth Headphones</h3>
+        <p>Crystal clear sound with noise cancelation.</p>
+        <button>Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/510uTHyDqGL.jpg" alt="Laptop">
+        <h3>Ultrabook Laptop</h3>
+        <p>Lightweight & powerful for your workflow.</p>
+        <button>Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="https://static-01.daraz.lk/p/7420404691e8d8d239969da13452f126.jpg" alt="Watch">
+        <h3>Smart Watch</h3>
+        <p>Stay connected and track your health.</p>
+        <button>Add to Cart</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" id="about">
+    <h2 class="section-title">About the Marketplace</h2>
+    <p style="text-align:center; max-width: 800px; margin: auto;">
+      This platform allows admins to list and manage products, and users to browse and purchase items seamlessly. With a beautiful UI and smooth experience, selling and shopping becomes a joy.
+    </p>
+  </div>
+
+  <div class="container" id="contact">
+    <h2 class="section-title">Contact Us</h2>
+    <p style="text-align:center;">Need help or want to become a seller? Reach out to our team.</p>
+  </div>
+
+  <footer>
+    <p><strong>Location:</strong> 123 Market Street, Cityville</p>
+    <p><strong>Email:</strong> support@yourmarket.com</p>
+    <p>&copy; 2025 Product Marketplace. All rights reserved.</p>
+    <div class="social-links">
+      <a href="#" class="fab fa-facebook-f">Facebook</a>
+      <a href="#" class="fab fa-twitter">Twitter</a>
+      <a href="#" class="fab fa-instagram">Instagram</a>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Cart</title>
+  <link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <a href="/">Home</a>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/cart">Cart</a>
+    <a href="/order_status">Orders</a>
+    <form action="/logout" method="POST">
+      <button type="submit" class="logout-btn">Logout</button>
+    </form>
+  </nav>
+
+  <div class="container">
+    <h2>Your Cart</h2>
+    <ul>
+      {% for item in cart %}
+        <li>
+          {{ item.name }} - ${{ item.price }} x {{ item.quantity }}
+          <a href="/edit_cart/{{ item._id }}">Edit</a>
+          <a href="/delete_cart_item/{{ item._id }}">Remove</a>
+        </li>
+      {% endfor %}
+    </ul>
+
+    <p><strong>Total: ₹ {{ total }}</strong></p>
+    <div class="links">
+      <a href="/checkout">
+        
+        <button class="button2">Checkout</button></a>
+      <a href="/dashboard">
+        <button class="button2">Back to Dashboard</button>
+      </a>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Products</title>
+    <link rel="stylesheet" href="../static/styles.css">
+</head>
+
+
+<body>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f4f8;
+            color: #333;
+        }
+
+        /* Navbar */
+        nav {
+            background-color: #ffc107;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        nav .nav-left,
+        nav .nav-right {
+            display: flex;
+            align-items: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 500;
+            transition: 0.3s ease;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .logout-btn {
+            background-color: #dc3545;
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .logout-btn:hover {
+            background-color: #c82333;
+        }
+
+        /* Page Container */
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+        }
+
+        h2,
+        h3 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #222;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        li {
+            background: #f9fbfc;
+            margin: 10px 0;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        li a {
+            color: #ffc107;
+            font-weight: 500;
+            margin-left: 15px;
+        }
+
+        li a:hover {
+            text-decoration: underline;
+        }
+
+        /* Form Styling */
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input,
+        select,
+        button {
+            padding: 12px;
+            margin: 10px 0;
+            width: 100%;
+            max-width: 400px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+        }
+
+        button {
+            background-color: #ffc107;
+            color: white;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: #ffcd36;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+        }
+
+        .btn-danger:hover {
+            background-color: #b02a37;
+        }
+
+
+        img {
+            max-width: 200px;
+            margin-top: 10px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+
+        /* Button Group Styling */
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .action-buttons a button,
+        .action-buttons form button {
+            padding: 8px 14px;
+            font-size: 0.9rem;
+        }
+
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            nav {
+                flex-direction: column;
+            }
+
+            nav a {
+                margin: 10px 0;
+            }
+
+            .container {
+                margin: 20px;
+                padding: 20px;
+            }
+
+            li {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            li a {
+                margin: 5px 0 0 0;
+            }
+        }
+    </style>
+
+    <nav>
+        <div class="nav-left">
+            <a href="/">Home</a>
+            <a href="/admin/dashboard">Dashboard</a>
+            <a href="/admin/orders">Orders</a>
+            <a href="/admin/add/products">Add Products</a>
+        </div>
+        <div class="nav-right">
+            <form method="POST" action="/logout">
+                <button class="logout-btn">Logout</button>
+            </form>
+        </div>
+    </nav>
+    <div class="container">
+
+        <h3>Add New Product</h3>
+        <form action="/add_product" method="POST" enctype="multipart/form-data">
+            <input type="text" name="name" placeholder="Product Name" required>
+            <input type="number" step="0.01" name="price" placeholder="Price" required>
+            <input type="number" name="quantity" placeholder="Quantity" required>
+            <input type="text" name="description" placeholder="Description" required>
+
+            <!-- Upload image from device -->
+            <label>Upload Image:</label>
+            <input type="file" name="image_file" accept="image/*">
+
+            <!-- Or provide image URL -->
+            <label>Or enter Image URL:</label>
+            <input type="text" name="image_url" placeholder="http://example.com/image.jpg">
+
+            <button type="submit">Add Product</button>
+        </form>
+
+    </div>
+
+</body>
+
+</html>

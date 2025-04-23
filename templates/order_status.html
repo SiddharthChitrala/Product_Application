@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Orders</title>
+  <link rel="stylesheet" href="../static/styles.css">
+
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <a href="/">Home</a>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/cart">Cart</a>
+    <a href="/order_status">Orders</a>
+    <form action="/logout" method="POST" style="display: inline;">
+      <button type="submit" class="logout-btn">Logout</button>
+    </form>
+  </nav>
+
+  <div class="container">
+    <h2>Your Orders</h2>
+    {% for order in orders %}
+      <div class="order-block">
+        <p><strong>Order Status: {{ order['status'] }}</strong></p>
+        <ul>
+          {% for item in order['items'] %}
+            <li>
+              {{ item['name'] }} - ₹{{ item['price'] }} x {{ item['quantity'] }}
+              {% if item.is_missing %}
+                <span class="missing-product">(Product no longer available)</span>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+
+        {% if order['status'] != 'canceled' %}
+          <form action="/cancel_order/{{ order['_id'] }}" method="POST">
+            <button type="submit">Cancel Order</button>
+          </form>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+
+</body>
+</html>

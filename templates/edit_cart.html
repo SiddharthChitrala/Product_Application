@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Cart Item</title>
+  <link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <a href="/">Home</a>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/cart">Cart</a>
+    <a href="/order_status">Orders</a>
+    <form action="/logout" method="POST">
+      <button type="submit" class="logout-btn">Logout</button>
+    </form>
+  </nav>
+
+  <div class="container">
+    <h2>Edit Cart Item</h2>
+    <form method="POST">
+      <label>Quantity:</label><br>
+      <input type="number" name="quantity" value="{{ cart_item.quantity }}" required><br><br>
+      <button type="submit">Update Quantity</button>
+    </form>
+    <a href="/cart">
+      <button class="button2">Back to Cart</button>
+      </a>
+  </div>
+
+</body>
+</html>

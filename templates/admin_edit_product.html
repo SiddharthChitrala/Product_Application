@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Product</title>
+
+</head>
+
+<style>
+  /* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f0f4f8;
+  color: #333;
+}
+
+/* Navbar */
+nav {
+  background-color: #ffc107;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+nav .nav-left,
+nav .nav-right {
+  display: flex;
+  align-items: center;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  font-weight: 500;
+  transition: 0.3s ease;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+.logout-btn {
+  background-color: #dc3545;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+
+.logout-btn:hover {
+  background-color: #c82333;
+}
+
+/* Page Container */
+.container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 30px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+h2,
+h3 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #222;
+}
+
+/* Form Styling */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px; /* Added gap for consistent spacing between form elements */
+}
+
+input,
+select,
+button,
+textarea {
+  padding: 12px;
+  margin: 10px 0;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #ffc107; /* Highlight input fields with yellow on focus */
+  outline: none;
+}
+
+button {
+  background-color: #ffc107;
+  color: white;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  padding: 12px 20px;
+  font-size: 1.1rem; /* Increase font size for the button */
+}
+
+button:hover {
+  background-color: #e0a800;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+textarea {
+  width: 100%;
+  height: 100px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  resize: vertical;
+}
+
+textarea:focus {
+  border-color: #ffc107;
+}
+
+/* Image Upload Section */
+div > label {
+  font-weight: bold;
+  margin-top: 20px;
+  display: block;
+}
+
+div > p {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+img {
+  max-width: 200px;
+  margin-top: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+/* Links and Buttons */
+.links {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.links a {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.links a:hover {
+  color: #0056b3;
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+  nav {
+      flex-direction: column;
+      text-align: center;
+  }
+
+  .container {
+      margin: 20px;
+      padding: 20px;
+  }
+
+  .container h2 {
+      font-size: 1.5rem;
+  }
+
+  input,
+  select,
+  button,
+  textarea {
+      max-width: 100%;
+  }
+}
+
+</style>
+<body>
+  <nav>
+    <div class="nav-left">
+
+      <a href="/">Home</a>
+      <a href="/admin/dashboard">Dashboard</a>
+
+      <a href="/admin/orders">Orders</a>
+      <a href="/admin/add/products">Add Products</a>
+    </div>
+    <div class="nav-right">
+      <form method="POST" action="/logout">
+        <button class="logout-btn">Logout</button>
+      </form>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h2>Edit Product</h2>
+    <form method="POST" enctype="multipart/form-data">
+      <input type="text" name="name" value="{{ product['name'] }}" placeholder="Product Name" required>
+      <input type="number" step="0.01" name="price" value="{{ product['price'] }}" placeholder="Price" required>
+      <input type="number" name="quantity" value="{{ product['quantity'] }}" placeholder="Quantity" required>
+      <textarea name="description" placeholder="Description" required style="width: 100%; height: 100px; padding: 12px; border-radius: 8px;">{{ product['description'] }}</textarea>
+      
+      <!-- Display current product image -->
+      <div style="margin-top: 10px;">
+        <label>Current Image:</label>
+        {% if product['image'] %}
+          <img src="{{ url_for('get_product_image', product_id=product['_id']) }}" alt="Product Image" style="max-width: 200px;">
+        {% else %}
+          <p>No image available.</p>
+        {% endif %}
+      </div>
+
+      <!-- Upload new image -->
+      <div style="margin-top: 20px;">
+        <label>Upload New Image:</label>
+        <input type="file" name="image_file" accept="image/*">
+      </div>
+
+      <!-- Or provide a new image URL -->
+      <div style="margin-top: 20px;">
+        <label>Or Enter Image URL:</label>
+        <input type="text" name="image_url" placeholder="http://example.com/image.jpg">
+      </div>
+
+      <button type="submit">Update Product</button>
+    </form>
+    <div class="links" style="margin-top: 20px;">
+      <a href="/admin/dashboard">Back to Dashboard</a>
+    </div>
+  </div>
+</body>
+</html>

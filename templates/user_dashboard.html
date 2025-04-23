@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Dashboard</title>
+  <link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <a href="/">Home</a>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/cart">Cart</a>
+    <a href="/order_status">Orders</a>
+    <form action="/logout" method="POST">
+      <button type="submit" class="logout-btn">Logout</button>
+    </form>
+  </nav>
+
+  <div class="container">
+    <h2>Welcome, {{ session['username'] }}</h2>
+  
+    <h3>Products:</h3>
+    <ul>
+      {% for p in products %}
+        <li>
+          {% if p.image %}
+            <img src="{{ url_for('get_product_image', product_id=p._id) }}" alt="{{ p.name }}" width="100">
+          {% endif %}
+          {{ p.name }} - ₹{{ p.price }} | {{ p.description }}
+          <a href="/add_to_cart/{{ p._id }}">
+            <button class="button2">Add to Cart</button>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+    
+  </div>
+
+</body>
+</html>

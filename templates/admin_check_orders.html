@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders</title>
+    <link rel="stylesheet" href="../static/styles.css">
+</head>
+
+<body>
+    <nav>
+        <div class="nav-left">
+            <a href="/">Home</a>
+            <a href="/admin/dashboard">Dashboard</a>
+            <a href="/admin/orders">Orders</a>
+            <a href="/admin/add/products">Add Products</a>
+        </div>
+        <div class="nav-right">
+            <form method="POST" action="/logout">
+                <button class="logout-btn">Logout</button>
+            </form>
+        </div>
+    </nav>
+
+
+
+    <div class="container">
+
+        <h3>Orders:</h3>
+        {% for order in orders %}
+        <div class="container" style="margin-top: 20px;">
+            <p><strong>Order for: {{ order['username'] }}</strong></p>
+            <p>Status: {{ order['status'] }}</p>
+            <ul>
+                {% for item in order['items'] %}
+                <li>{{ item['name'] }} - ₹{{ item['price'] }} x {{ item['quantity'] }}</li>
+                {% endfor %}
+            </ul>
+
+            {% if order['status'] not in ['canceled', 'refund', 'delayed'] %}
+            <form action="/admin/update_status/{{ order['_id'] }}" method="POST">
+                <label for="status">Change Status:</label>
+                <select name="status">
+                    <option value="pending" {% if order['status']=='pending' %}selected{% endif %}>Pending</option>
+                    <option value="approved" {% if order['status']=='approved' %}selected{% endif %}>Approved</option>
+                    <option value="shipped" {% if order['status']=='shipped' %}selected{% endif %}>Shipped</option>
+                    <option value="refund" {% if order['status']=='refund' %}selected{% endif %}>Refund</option>
+                    <option value="delayed" {% if order['status']=='delayed' %}selected{% endif %}>Delayed</option>
+                </select>
+                <button type="submit">Update</button>
+            </form>
+            {% else %}
+            <p>Status is {{ order['status'] }}. Cannot update.</p>
+            {% endif %}
+            
+        </div>
+        {% endfor %}
+
+
+    </div>
+
+
+
+</body>
+
+</html>
