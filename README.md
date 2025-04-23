@@ -143,19 +143,19 @@ Upon visiting the site, users can:
 
 **Home Page (Products View)**
 
-![Home Page](assets/screenshots/home_page.png)
+![Home Page](static/assets/home.jpeg)
 
 **User Dashboard**
 
-![User Dashboard](assets/screenshots/user_dashboard.png)
+![User Dashboard](static/assets/user_dashboard.png)
 
 **Admin Dashboard**
 
-![Admin Dashboard](assets/screenshots/admin_dashboard.png)
+![Admin Dashboard](static/assets/admin_dashboard.png)
 
 **Cart Page**
 
-![Cart Page](assets/screenshots/cart_page.png)
+![Cart Page](static/assets/cart.png)
 
 ## Contributing
 
